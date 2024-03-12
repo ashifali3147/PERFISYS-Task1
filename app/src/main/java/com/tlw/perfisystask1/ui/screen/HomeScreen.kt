@@ -3,6 +3,7 @@
 package com.tlw.perfisystask1.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,6 +44,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.firstcomposeapp.ui.routes.Screen
 import com.tlw.perfisystask1.R
 import com.tlw.perfisystask1.model.UserSpent
 import com.tlw.perfisystask1.ui.theme.BodyText
@@ -52,17 +52,22 @@ import com.tlw.perfisystask1.ui.theme.FavButton
 import com.tlw.perfisystask1.ui.theme.HeadingText
 import com.tlw.perfisystask1.ui.theme.HintText
 
+private lateinit var navController: NavHostController
+
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(_navController: NavHostController) {
+    navController = _navController
     MainUI()
 }
 
 @Composable
 fun MainUI() {
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         val userSpentList by remember {
             mutableStateOf(mutableListOf(UserSpent(1, "Ashif", "200"), UserSpent(2, "Priti", "60")))
         }
@@ -89,11 +94,25 @@ fun MainUI() {
                 .padding(20.dp)
         ) {
 
-            Text(modifier = Modifier.fillMaxWidth(), text = "Spent by:", textAlign = TextAlign.Start, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = BodyText)
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Spent by:",
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = BodyText
+            )
 
-            for (userSpent in userSpentList){
+            for (userSpent in userSpentList) {
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(modifier = Modifier.fillMaxWidth(), text = "${userSpent.name}: ${userSpent.spent}", textAlign = TextAlign.Start, fontWeight = FontWeight.Normal, fontSize = 18.sp, color = HeadingText)
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "${userSpent.name}: ${userSpent.spent}",
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp,
+                    color = HeadingText
+                )
             }
 
             Spacer(modifier = Modifier.height(80.dp))
@@ -101,29 +120,37 @@ fun MainUI() {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Card(
                     modifier = Modifier
-                        .align(Alignment.CenterStart),
-                    colors = CardDefaults.cardColors(
+                        .align(Alignment.CenterStart)
+                        .clickable {
+                            navController.navigate(Screen.ShowExpensesScreen.route)
+                        }, colors = CardDefaults.cardColors(
                         containerColor = Color.White
-                    ),
-                    shape = RoundedCornerShape(10.dp),
-                    elevation = CardDefaults.cardElevation(
+                    ), shape = RoundedCornerShape(10.dp), elevation = CardDefaults.cardElevation(
                         defaultElevation = 10.dp
-                    )) {
-                    Text(modifier = Modifier
-                        .wrapContentWidth()
-                        .padding(15.dp), text = "Show Expenses", textAlign = TextAlign.Start, fontWeight = FontWeight.Normal, fontSize = 20.sp, color = BodyText)
+                    )
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .padding(15.dp),
+                        text = "Show Expenses",
+                        textAlign = TextAlign.Start,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 20.sp,
+                        color = BodyText
+                    )
                 }
 
                 Card(
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd),
+                    modifier = Modifier.align(Alignment.CenterEnd),
                     colors = CardDefaults.cardColors(
                         containerColor = Color.White
                     ),
                     shape = CircleShape,
                     elevation = CardDefaults.cardElevation(
                         defaultElevation = 10.dp
-                    )){
+                    )
+                ) {
                     Icon(
                         modifier = Modifier
                             .height(55.dp)
@@ -143,8 +170,7 @@ fun MainUI() {
 @Composable
 fun GridCard() {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
     ) {
         val modifier = Modifier
             .fillMaxWidth()
@@ -153,11 +179,10 @@ fun GridCard() {
             .weight(1f)
         Card(
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-            modifier = modifier,
-            shape = RoundedCornerShape(10.dp),
-            elevation = CardDefaults.cardElevation(
+                containerColor = Color.White,
+            ), modifier = modifier.clickable {
+//                navController.navigate(Screen.ShowExpensesScreen.route)
+            }, shape = RoundedCornerShape(10.dp), elevation = CardDefaults.cardElevation(
                 defaultElevation = 10.dp
             )
         ) {
@@ -202,12 +227,10 @@ fun GridCard() {
             )
         ) {
             Row(
-                modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     text = "Past Price",
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
