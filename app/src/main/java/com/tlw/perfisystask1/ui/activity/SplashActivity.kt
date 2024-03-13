@@ -2,6 +2,7 @@ package com.tlw.perfisystask1.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,11 @@ import com.tlw.perfisystask1.R
 import com.tlw.perfisystask1.ui.theme.PERFISYSTask1Theme
 
 class SplashActivity : ComponentActivity() {
+
+    override fun onStart() {
+        super.onStart()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

@@ -1,5 +1,6 @@
 package com.tlw.perfisystask1.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +27,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.firstcomposeapp.ui.routes.Screen
 import com.tlw.perfisystask1.ui.theme.BodyText
+import com.tlw.perfisystask1.ui.theme.HeadingText
+import com.tlw.perfisystask1.ui.theme.HintText
 
 @Composable
 fun GroupExpensesScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column {
-            ToolBarBack { navController.navigateUp() }
+            ToolBarBack { navController.navigateUp()
+                 }
             Spacer(modifier = Modifier.height(5.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -41,13 +45,27 @@ fun GroupExpensesScreen(navController: NavHostController) {
                 fontSize = 30.sp,
                 color = BodyText
             )
+            Spacer(modifier = Modifier.height(30.dp))
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Priti owes 130.00 to Ashif",
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp,
+                color = HeadingText
+            )
+            Spacer(modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth()
+                .background(HintText))
         }
 
         Card(
             modifier = Modifier
-                .align(Alignment.BottomCenter).offset(y = -20.dp)
+                .align(Alignment.BottomCenter)
+                .offset(y = (-20).dp)
                 .clickable {
-                        navController.navigate(Screen.ExpenseHistoryScreen.route)
+                    navController.navigate(Screen.ExpenseHistoryScreen.route)
                 }, colors = CardDefaults.cardColors(
                 containerColor = Color.White
             ), shape = RoundedCornerShape(10.dp), elevation = CardDefaults.cardElevation(
@@ -70,8 +88,8 @@ fun GroupExpensesScreen(navController: NavHostController) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun PreviewHomeScreen7() {
-//    GroupExpensesScreen(navController)
-}
+//@Preview(showSystemUi = true, showBackground = true)
+//@Composable
+//fun PreviewHomeScreen7() {
+//    GroupExpensesScreen()
+//}

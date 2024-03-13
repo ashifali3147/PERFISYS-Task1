@@ -8,6 +8,7 @@ import com.example.firstcomposeapp.ui.routes.Screen
 import com.tlw.perfisystask1.ui.screen.ExpenseHistoryScreen
 import com.tlw.perfisystask1.ui.screen.GroupExpensesScreen
 import com.tlw.perfisystask1.ui.screen.HomeScreen
+import com.tlw.perfisystask1.ui.screen.PersonalExpensesScreen
 import com.tlw.perfisystask1.ui.screen.ShowExpensesScreen
 
 @Composable
@@ -19,6 +20,9 @@ fun Navigation() {
         }
         composable(route = Screen.ShowExpensesScreen.route) {
             ShowExpensesScreen(navController)
+        }
+        composable(route = Screen.PersonalExpensesScreen.route) {
+            PersonalExpensesScreen()
         }
         composable(route = Screen.GroupExpensesScreen.route) {
             GroupExpensesScreen(navController)

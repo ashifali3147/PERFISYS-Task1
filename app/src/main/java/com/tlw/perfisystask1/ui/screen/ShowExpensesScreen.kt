@@ -35,7 +35,9 @@ import com.tlw.perfisystask1.ui.theme.BodyText
 fun ShowExpensesScreen(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxSize()) {
         ToolBarBack { navController.navigateUp() }
-        CustomExpenseCard(title = "PERSONAL EXPENSES")
+        CustomExpenseCard(title = "PERSONAL EXPENSES"){
+            navController.navigate(Screen.PersonalExpensesScreen.route)
+        }
         CustomExpenseCard(title = "GROUP EXPENSES") {
             navController.navigate(Screen.GroupExpensesScreen.route)
         }

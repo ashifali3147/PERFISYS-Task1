@@ -20,6 +20,26 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "key0"
+            keyPassword = "tlw@24"
+            storePassword = "tlw@24"
+            storeFile = file("singned_key.jks")
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

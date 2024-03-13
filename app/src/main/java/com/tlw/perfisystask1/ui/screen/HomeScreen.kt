@@ -61,7 +61,7 @@ fun HomeScreen(_navController: NavHostController) {
 }
 
 @Composable
-fun MainUI() {
+private fun MainUI() {
 
     Column(
         modifier = Modifier
